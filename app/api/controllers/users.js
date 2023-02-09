@@ -1,43 +1,44 @@
+'use strict';
 const userModel = require("../models/users");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-//Next simply allows the next route handler in line to handle the request
+const { validationResult } = require('express-validator');
+
 module.exports = {
-    create: function (req, res, next) {
-        console.log(req.body);
-        var userFound = userModel.findOne({email: req.body.email});
-        userFound.count(function (err, count) {
-            if (err) {
-                next(err);
+    async create(req, res) {
+        var errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        var userFound = await userModel.findOne({email: req.body.email});
+        console.log(userFound)
+        if (userFound) {
+            res.json({status: "error", message: "user already exists", data: userFound})
+        } else {
+            var result = await userModel.create({name: req.body.name, email: req.body.email, password: req.body.password});
+            if (!result) {
+                res.json({status: "error", message: "cannot create user this time", data: null})
             } else {
-                if (count >= 1) {
-                    res.json({status: "error", message: "user already exists", data: null})
-                } else {
-                    userModel.create({name: req.body.name, email: req.body.email, password: req.body.password},
-                        function (err, result) {
-                            if (err) {
-                                next(err);
-                            } else {
-                                res.json({status: "success", message: "user added successfully", data: null})
-                            }
-                        })
-                }
+                res.json({status: "success", message: "user added successfully", data: null})
             }
-        })
+        }
     },
-    authenticate: function (req, res, next) {
-        userModel.findOne({email: req.body.email},
-            function (err, userInfo) {
-                if (err) {
-                    next(err);
-                } else {
-                    if (bcrypt.compareSync(req.body.password, userInfo.password)) {
-                        const token = jwt.sign({id: userInfo.id}, req.app.get("secretKey"), {expiresIn: '1h'});
-                        res.json({status: 200, "message": "user found", data: {user: userInfo, token: token}})
-                    } else {
-                        res.json({status: 404, "message": "invalid email/password !!!!"})
-                    }
-                }
-            });
+
+    async authenticate(req, res, next) {
+        var errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        var userInfo = await userModel.findOne({email: req.body.email});
+        if (!userInfo) {
+            res.json({status: 404, "message": "something went wrong"})
+        } else {
+            if (bcrypt.compareSync(req.body.password, userInfo.password)) {
+                const token = jwt.sign({id: userInfo.id}, req.app.get("secretKey"), {expiresIn: '1h'});
+                res.json({status: 200, "message": "user found", data: {user: userInfo, token: token}})
+            } else {
+                res.json({status: 404, "message": "invalid email/password !!!!"})
+            }
+        }
     }
 }

@@ -6,11 +6,12 @@ const app = express();
 //inject routes in this file
 const movies = require('./routes/movies');
 const users = require('./routes/users');
+const userMovies = require('./routes/userMovies');
+const validateToken = require('./middlewares/validateToken');
+
 
 //database config
 const mongose = require('./config/database');
-
-var jwt = require('jsonwebtoken');
 app.set('secretKey', 'jwt-node');
 
 //connecting to mongodb
@@ -27,20 +28,9 @@ app.get("/", function (req, res){
 app.use('/users', users);
 
 //private routes
-app.use('/movies', validateUser, movies);
+app.use('/movies', validateToken.validateUser, movies);
+app.use('/userMovies', validateToken.validateUser, userMovies);
 
-function validateUser(req, res, next){
-    jwt.verify(req.headers['x-access-token'], req.app.get('secretKey'),
-    function(err, decoded){
-        if (err) {
-            res.json({status:"error", message: err.message, data:null});
-        }else{
-            // add user id to request
-            req.body.userId = decoded.id;
-            next();
-        }
-    });
-}
 
 // express doesn't consider not found 404 as an error so we need to handle 404 explicitly
 // handle 404 error
@@ -51,14 +41,14 @@ app.use(function(req, res, next) {
 });
 
 // handle errors
-app.use(function(err, req, res, next) {
-    console.log(err);
-    if(err.status === 404)
-        res.status(404).json({message: "Not found"});
-    else
-        res.status(500).json({message: "Something looks wrong :( !!!"});
-});
+// app.use(function(err, req, res, next) {
+//     console.log(err);
+//     if(err.status === 404)
+//         res.status(404).json({message: "Not found"});
+//     else
+//         res.status(500).json({message: "Something looks wrong :( !!!"});
+// });
 
-app.listen(3001,  () =>{
-    console.log("Server is listening on port 3001")
+app.listen(3002,  () =>{
+    console.log("Server is listening on port")
 })

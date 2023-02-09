@@ -1,4 +1,10 @@
 **A Basic Implementation of Node JS CRUD with public & private routes with JWT authentication**
+  
+**New Improvements**
+
+    Async await
+    promises
+    express-validator
 
 **Requirements :**
 
@@ -12,7 +18,7 @@ JWT (Json Web Token)
 
 npm init -y -- to get packages.json
 
-npm i bcrypt body-parser express jsonwebtoken mongoose mongose morgan
+npm i bcrypt body-parser express jsonwebtoken mongoose mongose morgan express-validator
 
 npm i nodemon --save-dev   (for development purpose only)
 

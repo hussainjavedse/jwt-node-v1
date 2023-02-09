@@ -21,23 +21,23 @@
 						},
 						{
 							"key": "email",
-							"value": "tester3@gmail.com",
+							"value": "tester57@gmail.com",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "tester1",
+							"value": "tester7",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:4000/users/register",
+					"raw": "http://localhost:3002/users/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "3002",
 					"path": [
 						"users",
 						"register"
@@ -67,12 +67,12 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:4000/users/authenticate",
+					"raw": "http://localhost:3002/users/authenticate",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "3002",
 					"path": [
 						"users",
 						"authenticate"
@@ -93,7 +93,7 @@
 					},
 					{
 						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTM0NzExOCwiZXhwIjoxNjc1MzUwNzE4fQ.Fb7FOuw1ckQz8K5-pFWId_q8qFabnvD4iwrJpULORqU",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTg4MDMwNiwiZXhwIjoxNjc1ODgzOTA2fQ.t2zuawXH1RTb9fo60F406-szPhuQmLPwWisCLwPhKt0",
 						"type": "text"
 					}
 				],
@@ -118,12 +118,12 @@
 					]
 				},
 				"url": {
-					"raw": "http://localhost:3001/movies/",
+					"raw": "http://localhost:3002/movies/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3001",
+					"port": "3002",
 					"path": [
 						"movies",
 						""
@@ -144,20 +144,26 @@
 					},
 					{
 						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTM0NzExOCwiZXhwIjoxNjc1MzUwNzE4fQ.Fb7FOuw1ckQz8K5-pFWId_q8qFabnvD4iwrJpULORqU",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTk0MTEwMywiZXhwIjoxNjc1OTQ0NzAzfQ.u4Bv7y_5L2ElPypQlFfxw1-RyEvHBEWNQ7Skx85jP4E",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3001/movies/",
+					"raw": "http://localhost:3002/movies/getAll?sort=desc",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3001",
+					"port": "3002",
 					"path": [
 						"movies",
-						""
+						"getAll"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "desc"
+						}
 					]
 				}
 			},
@@ -165,6 +171,9 @@
 		},
 		{
 			"name": "get movie",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [
@@ -175,20 +184,30 @@
 					},
 					{
 						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTM0NzExOCwiZXhwIjoxNjc1MzUwNzE4fQ.Fb7FOuw1ckQz8K5-pFWId_q8qFabnvD4iwrJpULORqU",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTk0MTEwMywiZXhwIjoxNjc1OTQ0NzAzfQ.u4Bv7y_5L2ElPypQlFfxw1-RyEvHBEWNQ7Skx85jP4E",
 						"type": "text"
 					}
 				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://localhost:3001/movies/63dbc734397106e7ec166697",
+					"raw": "http://localhost:3002/movies/getById?movie_id=63dde4e439848cb2ed4f71c7",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3001",
+					"port": "3002",
 					"path": [
 						"movies",
-						"63dbc734397106e7ec166697"
+						"getById"
+					],
+					"query": [
+						{
+							"key": "movie_id",
+							"value": "63dde4e439848cb2ed4f71c7"
+						}
 					]
 				}
 			},
@@ -206,7 +225,7 @@
 					},
 					{
 						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTM0NzExOCwiZXhwIjoxNjc1MzUwNzE4fQ.Fb7FOuw1ckQz8K5-pFWId_q8qFabnvD4iwrJpULORqU",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTg4MDMwNiwiZXhwIjoxNjc1ODgzOTA2fQ.t2zuawXH1RTb9fo60F406-szPhuQmLPwWisCLwPhKt0",
 						"type": "text"
 					}
 				],
@@ -215,21 +234,26 @@
 					"urlencoded": [
 						{
 							"key": "name",
-							"value": "d-dayyy",
+							"value": "d-dayyy-ficyion",
 							"type": "text"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:3001/movies/63dbc734397106e7ec166697",
+					"raw": "http://localhost:3002/movies?movie_id=63dde4e439848cb2ed4f71c7",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3001",
+					"port": "3002",
 					"path": [
-						"movies",
-						"63dbc734397106e7ec166697"
+						"movies"
+					],
+					"query": [
+						{
+							"key": "movie_id",
+							"value": "63dde4e439848cb2ed4f71c7"
+						}
 					]
 				}
 			},
@@ -247,20 +271,131 @@
 					},
 					{
 						"key": "x-access-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTM0NzExOCwiZXhwIjoxNjc1MzUwNzE4fQ.Fb7FOuw1ckQz8K5-pFWId_q8qFabnvD4iwrJpULORqU",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTg4MDMwNiwiZXhwIjoxNjc1ODgzOTA2fQ.t2zuawXH1RTb9fo60F406-szPhuQmLPwWisCLwPhKt0",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:3001/movies/63dbc734397106e7ec166697",
+					"raw": "http://localhost:3002/movies?movie_id=63dde45055ec8fd036857dee",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3001",
+					"port": "3002",
 					"path": [
-						"movies",
-						"63dbc734397106e7ec166697"
+						"movies"
+					],
+					"query": [
+						{
+							"key": "movie_id",
+							"value": "63dde45055ec8fd036857dee"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user movies",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTg3MDQ3MSwiZXhwIjoxNjc1ODc0MDcxfQ.eer9ptR1t4Ag17schG3J5P6lIeY5vr6yJImmm-YBy_E",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "63dbc492ffdc617ffac70640",
+							"type": "text"
+						},
+						{
+							"key": "added_on",
+							"value": "2022-02-05",
+							"type": "text"
+						},
+						{
+							"key": "movies",
+							"value": "uiy",
+							"type": "text"
+						},
+						{
+							"key": "movies",
+							"value": "ok",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3002/userMovies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"userMovies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user movies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZGJjNDkyZmZkYzYxN2ZmYWM3MDY0MCIsImlhdCI6MTY3NTg3MDQ3MSwiZXhwIjoxNjc1ODc0MDcxfQ.eer9ptR1t4Ag17schG3J5P6lIeY5vr6yJImmm-YBy_E",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "http://localhost:3002/userMovies?user_id=63dbc492ffdc617ffac70640&movies=true&movies=alpha",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
+					"path": [
+						"userMovies"
+					],
+					"query": [
+						{
+							"key": "user_id",
+							"value": "63dbc492ffdc617ffac70640"
+						},
+						{
+							"key": "movies",
+							"value": "true"
+						},
+						{
+							"key": "movies",
+							"value": "alpha"
+						}
 					]
 				}
 			},
